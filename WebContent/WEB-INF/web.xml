@@ -14,7 +14,7 @@
 		<url-pattern>/faces/*</url-pattern>
 	</servlet-mapping>
 
-	<filter>
+<!-- 	<filter>
 		<filter-name>loginFilter</filter-name>
 		<filter-class>br.unitins.sac.filter.LoginFilter</filter-class>
 	</filter>
@@ -23,7 +23,7 @@
 		<filter-name>loginFilter</filter-name>
 		<url-pattern>/faces/pages/*</url-pattern>
 	</filter-mapping>
-
+ -->
 	<!-- Finaliza a sessão -->
 	<session-config>
 		<!-- em minutos -->
