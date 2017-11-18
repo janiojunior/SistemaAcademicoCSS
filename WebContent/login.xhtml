@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/pages/template.xhtml">
+
+	<ui:define name="conteudo">
+
+		<f:view>
+			<center>
+				<p:focus id="pgDados"/>
+				<h:form id="form">
+					<p:growl id="growl" showDetail="false" sticky="false" life="5000" />
+					<p:panel id="panel">
+						
+						<h2>.:LOGIN:.</h2>
+						
+						<p:separator />
+						
+						<p:panelGrid id="pgDados" columns="2" styleClass="semBorda">
+							<p:outputLabel value="Usuário:" />
+							<p:inputText value="#{loginController.entity.usuario}" styleClass="m-input" placeholder="Informe o usuário."/>
+
+							<p:outputLabel value="Senha:" />
+							<p:password value="#{loginController.entity.senha}" styleClass="m-input" placeholder="Informe a senha."/>
+						</p:panelGrid>
+						
+						<p:separator />
+
+						<p:commandButton value="Entrar"
+							styleClass="m-button"
+							actionListener="#{loginController.logar}"
+							update="form" />
+
+						<p:commandButton value="Limpar" icon=""
+							styleClass="m-button"
+							actionListener="#{loginController.clean}" process="panel"
+							update="form" />
+							
+					</p:panel>
+
+				</h:form>
+			</center>
+		</f:view>
+
+	</ui:define>
+</ui:composition>

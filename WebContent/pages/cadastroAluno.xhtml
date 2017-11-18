@@ -1,0 +1,145 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/pages/template.xhtml">
+
+	<ui:define name="conteudo">
+
+		<f:view>
+			<center>
+
+				<h:form id="form">
+					<p:growl id="growl" showDetail="false" sticky="false" life="5000" />
+
+
+					<p:panel id="panel">
+						
+						<h2>Cadastro de Aluno</h2>
+						
+						<p:separator />
+						
+						<p:panelGrid id="pgDados" columns="2" styleClass="semBorda">
+							<p:outputLabel value="Matrícula:" />
+							<p:inputText value="#{alunoController.entity.matricula}" styleClass="m-input"/>
+
+							<p:outputLabel value="Nome:" />
+							<p:inputText value="#{alunoController.entity.nome}" styleClass="m-input"/>
+							
+							<p:outputLabel value="CPF:" />
+							<p:inputText value="#{alunoController.entity.cpf}" styleClass="m-input"/>
+
+<ui:remove>							
+							<p:outputLabel value="CPF:" />
+							<p:inputMask value="#{alunoController.entity.cpf}" styleClass="m-input" mask="999.999.999-99" />
+</ui:remove>							
+							
+							<p:outputLabel value="Data de Nascimento:" />
+							<p:inputText value="#{alunoController.entity.dataNascimento}" styleClass="m-input">
+								<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="America/Araguaina"/>
+							</p:inputText>
+<ui:remove>
+							<p:outputLabel value="Data de Nascimento:" />
+        						<p:calendar value="#{alunoController.entity.dataNascimento}" pattern="dd/MM/yyyy" mask="true" />							
+</ui:remove>							
+
+							
+							<p:outputLabel value="Valor da Mensalidade:" />
+							<p:inputText value="#{alunoController.entity.valorMensalidade}" styleClass="m-input">
+								<f:convertNumber locale="pt_BR" pattern="###,##0.00"/>
+							</p:inputText>
+<ui:remove>						
+							<p:outputLabel value="Valor da Mensalidade:" />
+							<p:inputNumber value="#{alunoController.entity.valorMensalidade}" styleClass="m-input" decimalPlaces="2" />
+</ui:remove>								
+							
+
+							<p:outputLabel value="Natural de:" />
+							<p:selectOneMenu value="#{alunoController.entity.cidade}" styleClass="m-select">
+								<f:converter converterId="cidadeConverter" />
+								<f:selectItem itemLabel="Selecione uma cidade ..." />
+								<f:selectItems value="#{alunoController.listaCidade}" var="o"
+									itemLabel="#{o.nome}" itemValue="#{o}" />
+							</p:selectOneMenu>
+
+						</p:panelGrid>
+
+						<br />
+
+						<p:commandButton value="Incluir"
+							styleClass="m-button"
+							actionListener="#{alunoController.insert}"
+							disabled="#{alunoController.entity.id != null}" process="panel"
+							update="form" />
+
+						<p:commandButton value="Alterar"
+							styleClass="m-button"
+							actionListener="#{alunoController.update}"
+							disabled="#{alunoController.entity.id == null}" process="panel"
+							update="form" />
+
+						<p:commandButton value="Excluir"
+							styleClass="m-button"
+							actionListener="#{alunoController.delete}"
+							disabled="#{alunoController.entity.id == null}" process="panel"
+							update="form" />
+
+						<p:commandButton value="Limpar" icon=""
+							styleClass="m-button"
+							actionListener="#{alunoController.clean}" process="panel"
+							update="form" />
+
+
+						<p:separator />
+
+						<p:dataTable id="dataTable" value="#{alunoController.listaAluno}"
+							var="objeto" widgetVar="dataTableWV" reflow="true">
+							<f:facet name="header" >Lista de Alunos</f:facet>
+							<p:column>
+								<f:facet name="header">Id</f:facet>
+								<h:outputText value="#{objeto.id}" >
+									<f:convertNumber pattern="####-##"/>
+								</h:outputText>
+							</p:column>
+							<p:column>
+								<f:facet name="header">Matricula</f:facet>
+								<h:outputText value="#{objeto.matricula}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">Nome</f:facet>
+								<h:outputText value="#{objeto.nome}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">CPF</f:facet>
+								<h:outputText value="#{objeto.cpf}" converter="cpfConverter"/>
+							</p:column>
+							<p:column>
+								<f:facet name="header">Data de Nascimento</f:facet>
+								<h:outputText value="#{objeto.dataNascimento}" />
+							</p:column>		
+							<p:column>
+								<f:facet name="header">Mensalidade</f:facet>
+								<h:outputText value="#{objeto.valorMensalidade}" />
+							</p:column>													
+							<p:column>
+								<f:facet name="header">Cidade</f:facet>
+								<h:outputText value="#{objeto.cidade.nome}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">Ação</f:facet>
+								<p:commandButton value="Editar" update="form"
+									icon="fa fa-pencil" styleClass="m-button">
+									<f:setPropertyActionListener target="#{alunoController.entity}"
+										value="#{objeto}" />
+								</p:commandButton>
+							</p:column>
+
+						</p:dataTable>
+					</p:panel>
+
+				</h:form>
+			</center>
+		</f:view>
+
+	</ui:define>
+</ui:composition>

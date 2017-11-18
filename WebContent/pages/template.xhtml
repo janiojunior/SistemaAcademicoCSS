@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Sistema Acadêmico</title>
+	<h:outputStylesheet library="css" name="geral.css" />
+	<h:outputStylesheet library="css" name="modify.css" />
+	<h:outputStylesheet library="webjars/font-awesome/4.7.0/css" name="font-awesome.min-jsf.css" />
+	<h:outputScript library="js" name="menu.js" />
+	<h:outputScript library="js" name="locale-primefaces.js"/>	
+</h:head>
+
+<h:body>
+
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" 
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage library="img" name="ajaxloading.gif" />
+	</p:dialog>
+
+	<div class="quadroIconeMenu">
+		<a href="#">
+			<i class="fa fa-plus fa-2x iconeMenu"/>
+		</a>
+	</div>
+	
+	<div class="ui-g">
+	
+		<div class="cabecalho ui-g-12">
+			<div class="quadroLogo">
+				<p:graphicImage library="img" name="logo.png" styleClass="logo" />
+			</div>
+		</div>
+	
+	
+		<div class="meio ui-g-12">
+			<div class="menu">
+				<h:form>
+					<i class="fa fa-chevron-right"/><h:link  value="Cidades" outcome="/pages/cadastroCidade.xhtml" style="color:white;" /> <br/>
+					<i class="fa fa-chevron-right"/><h:link value=" Alunos" outcome="/pages/cadastroAluno.xhtml" style="color:white;" /> <br/>
+					<i class="fa fa-chevron-right"/><h:link value=" Alunos (Responsive)" outcome="/pages/cadastroAlunoResponsive.xhtml" style="color:white;" /> <br/>
+					<br/>
+					
+					<i class="fa fa-chevron-right"/><h:commandLink value=" Sair do Sistema (logout)"  actionListener="#{loginController.logout}" style="color:white;" />
+				</h:form>
+			</div>
+			<div class="conteudo">
+				<ui:insert name="conteudo" />
+			</div>
+			
+		</div>
+	
+		<div class="rodape ui-g-12">
+			<h:outputText value="© 2017 UNITINS - Universidade Estadual do Tocantins. Todos os direitos reservados." />
+		</div>
+		
+	</div>
+
+</h:body>
+</html>
